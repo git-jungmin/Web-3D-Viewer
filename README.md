@@ -13,4 +13,5 @@ This is a NestJS-based backend for uploading and managing 3D files (e.g. GLTF, O
 ```bash
 npm install
 npm run start:dev
+npm install @aws-sdk/client-s3 multer multer-s3
 ```
