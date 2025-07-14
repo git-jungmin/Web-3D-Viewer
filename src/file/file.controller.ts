@@ -17,12 +17,15 @@ export class FileController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return this.fileService.upload(file);
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<{ key: string; url: string }> {
+    return await this.fileService.upload(file);
   }
 
   @Delete()
-  deleteFile(@Body() body: DeleteFileDto) {
-    return this.fileService.deleteFile(body.s3Key);
+  async deleteFile(@Body() body: DeleteFileDto): Promise<{ message: string }> {
+    await this.fileService.deleteFile(body.s3Key);
+    return { message: 'File deleted successfully' };
   }
 }
