@@ -11,14 +11,24 @@ import { extname } from 'path';
 
 @Injectable()
 export class S3Service {
-  private s3 = new S3Client({
-    region: process.env.AWS_REGION,
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-  private bucket = process.env.S3_BUCKET_NAME;
+  private s3: S3Client;
+  private bucket: string;
+  private region: string;
+
+  constructor(private configService: ConfigService) {
+    this.region = this.configService.get<string>('AWS_REGION');
+    this.bucket = this.configService.get<string>('AWS_S3_BUCKET_NAME');
+
+    this.s3 = new S3Client({
+      region: this.region,
+      credentials: {
+        accessKeyId: this.configService.get<string>('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: this.configService.get<string>(
+          'AWS_SECRET_ACCESS_KEY',
+        ),
+      },
+    });
+  }
 
   async uploadFile(
     file: Express.Multer.File,
@@ -34,7 +44,7 @@ export class S3Service {
     );
     return {
       Key: key,
-      Location: `https://${this.bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`,
+      Location: `https://${this.bucket}.s3.${this.region}.amazonaws.com/${key}`,
     };
   }
 

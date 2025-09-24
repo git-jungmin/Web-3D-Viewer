@@ -7,13 +7,16 @@
 
 ## ✨ 주요 기능 (Features)
 
+This is a NestJS-based backend server that provides RESTful APIs to upload, manage, and serve 3D files (GLTF, OBJ, etc.) for use in web-based 3D viewers.
+
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+=======
 - 파일 업로드 (AWS S3 저장)
 - 파일 삭제 (AWS S3 연동)
 - NestJS 기반 모듈화된 구조
 - DTO, Service, Controller 계층 분리
 - 향후 DB 연동을 통한 파일 메타데이터 저장 확장 가능
 
----
 
 ## 🛠 기술 스택 (Tech Stack)
 
