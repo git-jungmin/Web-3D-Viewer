@@ -24,6 +24,8 @@
 
 ## Description
 
+This is a NestJS-based backend server that provides RESTful APIs to upload, manage, and serve 3D files (GLTF, OBJ, etc.) for use in web-based 3D viewers.
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
