@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from 'typeorm';
 
 @Entity()
 export class FileEntity {
@@ -19,4 +19,13 @@ export class FileEntity {
 
   @CreateDateColumn()
   uploadedAt: Date;
+
+  @Column()
+  title: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  tags: string;
 }
