@@ -5,9 +5,10 @@ import { FileService } from './file.service';
 import { DeleteFileDto } from './dto/delete-file.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/auth/custom-guards-decorators/roles.guard';
+import { UploadFileDto, UploadFileResponseDto } from './dto/upload-file.dto';
 
 @UseGuards(AuthGuard(), RolesGuard)
-@Controller('file')
+@Controller('api/file')
 export class FileController {
     constructor(private readonly fileService: FileService) {}
 
@@ -15,8 +16,9 @@ export class FileController {
     @UseInterceptors(FileInterceptor('file'))
     async uploadFile(
         @UploadedFile() file: Express.Multer.File,
-    ): Promise<{ key: string; url: string }> {
-        return await this.fileService.upload(file);
+        @Body() uploadFileDto: UploadFileDto,
+    ): Promise<UploadFileResponseDto> {
+        return await this.fileService.upload(file, uploadFileDto);
     }
 
     @Delete()
